@@ -1,17 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CalculatorFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="bs"
+            type="com.gnayuil.acost.data.bean.ButtonStyle" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_1"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_1"
+            app:layout_constraintBottom_toTopOf="@id/btn_4"
+            app:layout_constraintEnd_toStartOf="@id/btn_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_2"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_2"
+            app:layout_constraintBottom_toTopOf="@id/btn_5"
+            app:layout_constraintEnd_toStartOf="@id/btn_3"
+            app:layout_constraintStart_toEndOf="@id/btn_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_3"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_3"
+            app:layout_constraintBottom_toTopOf="@id/btn_6"
+            app:layout_constraintEnd_toStartOf="@id/btn_del"
+            app:layout_constraintStart_toEndOf="@id/btn_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_4"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_4"
+            app:layout_constraintBottom_toTopOf="@id/btn_7"
+            app:layout_constraintEnd_toStartOf="@id/btn_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_1" />
+
+        <Button
+            android:id="@+id/btn_5"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_5"
+            app:layout_constraintBottom_toTopOf="@id/btn_8"
+            app:layout_constraintEnd_toStartOf="@id/btn_6"
+            app:layout_constraintStart_toEndOf="@id/btn_4"
+            app:layout_constraintTop_toBottomOf="@id/btn_2" />
+
+        <Button
+            android:id="@+id/btn_6"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_6"
+            app:layout_constraintBottom_toTopOf="@id/btn_9"
+            app:layout_constraintEnd_toStartOf="@id/btn_del"
+            app:layout_constraintStart_toEndOf="@id/btn_5"
+            app:layout_constraintTop_toBottomOf="@id/btn_3" />
+
+        <Button
+            android:id="@+id/btn_7"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_7"
+            app:layout_constraintBottom_toTopOf="@id/btn_0"
+            app:layout_constraintEnd_toStartOf="@id/btn_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_4" />
+
+        <Button
+            android:id="@+id/btn_8"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_8"
+            app:layout_constraintBottom_toTopOf="@id/btn_0"
+            app:layout_constraintEnd_toStartOf="@id/btn_9"
+            app:layout_constraintStart_toEndOf="@id/btn_7"
+            app:layout_constraintTop_toBottomOf="@id/btn_5" />
+
+        <Button
+            android:id="@+id/btn_9"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_9"
+            app:layout_constraintBottom_toTopOf="@id/btn_dot"
+            app:layout_constraintEnd_toStartOf="@id/btn_del"
+            app:layout_constraintStart_toEndOf="@id/btn_8"
+            app:layout_constraintTop_toBottomOf="@id/btn_6" />
+
+        <Button
+            android:id="@+id/btn_0"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/btn_8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_add" />
+
+        <Button
+            android:id="@+id/btn_dot"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_dot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_del"
+            app:layout_constraintStart_toEndOf="@id/btn_0"
+            app:layout_constraintTop_toBottomOf="@id/btn_9" />
+
+        <Button
+            android:id="@+id/btn_del"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_del"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_dot"
+            app:layout_constraintTop_toBottomOf="@id/btn_add" />
+
+        <Button
+            android:id="@+id/btn_add"
+            spacing="@{bs.spacing}"
+            radius="@{bs.radius}"
+            solidColor="@{bs.solidColor}"
+            strokeColor="@{bs.strokeColor}"
+            strokeWidth="@{bs.strokeWidth}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@string/key_add"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_dot"
+            app:layout_constraintTop_toTopOf="@+id/btn_3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -5,14 +5,15 @@
     android:orientation="horizontal">
 
     <FrameLayout
-        android:id="@+id/frame_calculator"
+        android:id="@+id/frame_information"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
 
     <FrameLayout
-        android:id="@+id/frame_information"
+        android:id="@+id/frame_calculator"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />
+
 </LinearLayout>
