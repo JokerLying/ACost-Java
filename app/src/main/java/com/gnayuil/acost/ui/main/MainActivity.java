@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.gnayuil.acost.R;
-import com.gnayuil.acost.data.ConsoleStyle;
+import com.gnayuil.acost.data.style.ConsoleStyle;
 import com.gnayuil.acost.databinding.ActivityMainBinding;
 import com.gnayuil.acost.ui.base.BaseActivity;
 import com.gnayuil.acost.ui.calculator.CalculatorFragment;

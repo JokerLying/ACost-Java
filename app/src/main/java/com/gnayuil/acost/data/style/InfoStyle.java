@@ -1,15 +1,18 @@
-package com.gnayuil.acost.data;
+package com.gnayuil.acost.data.style;
 
 import androidx.annotation.ColorInt;
 
-public class ButtonStyle {
+public class InfoStyle {
     private int radius;
-    private @ColorInt
-    int solidColor;
     private @ColorInt
     int strokeColor;
     private int strokeWidth;
     private int spacing;
+    private @ColorInt
+    int normalSolidColor;
+    private @ColorInt
+    int selectedSolidColor;
+
 
     public int getRadius() {
         return radius;
@@ -17,14 +20,6 @@ public class ButtonStyle {
 
     public void setRadius(int radius) {
         this.radius = radius;
-    }
-
-    public int getSolidColor() {
-        return solidColor;
-    }
-
-    public void setSolidColor(int solidColor) {
-        this.solidColor = solidColor;
     }
 
     public int getStrokeColor() {
@@ -49,5 +44,21 @@ public class ButtonStyle {
 
     public void setSpacing(int spacing) {
         this.spacing = spacing;
+    }
+
+    public int getNormalSolidColor() {
+        return normalSolidColor;
+    }
+
+    public void setNormalSolidColor(int normalSolidColor) {
+        this.normalSolidColor = normalSolidColor;
+    }
+
+    public int getSelectedSolidColor() {
+        return selectedSolidColor;
+    }
+
+    public void setSelectedSolidColor(int selectedSolidColor) {
+        this.selectedSolidColor = selectedSolidColor;
     }
 }

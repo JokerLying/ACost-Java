@@ -3,20 +3,20 @@ package com.gnayuil.acost.ui.base.binding;
 import android.graphics.drawable.GradientDrawable;
 import android.widget.Button;
 
-import androidx.annotation.ColorInt;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.BindingAdapter;
 
 import com.gnayuil.acost.R;
+import com.gnayuil.acost.data.style.ButtonStyle;
 
 public class ButtonBindingAdapter {
 
-    @BindingAdapter(value = {"btn_radius", "btn_solidColor", "btn_strokeColor", "btn_strokeWidth"}, requireAll = true)
-    public static void setBackground(Button view, int radius, @ColorInt int solidColor, @ColorInt int strokeColor, int strokeWidth) {
+    @BindingAdapter(value = {"btn_style"})
+    public static void setBackground(Button view, ButtonStyle style) {
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setCornerRadius(radius);
-        drawable.setColor(solidColor);
-        drawable.setStroke(strokeWidth, strokeColor);
+        drawable.setCornerRadius(style.getRadius());
+        drawable.setColor(style.getSolidColor());
+        drawable.setStroke(style.getStrokeWidth(), style.getStrokeColor());
         view.setBackground(drawable);
     }
 

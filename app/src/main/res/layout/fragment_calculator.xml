@@ -6,7 +6,7 @@
 
         <variable
             name="bs"
-            type="com.gnayuil.acost.data.ButtonStyle" />
+            type="com.gnayuil.acost.data.style.ButtonStyle" />
 
         <variable
             name="click"
@@ -19,11 +19,8 @@
 
         <Button
             android:id="@+id/btn_1"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(1)}"
@@ -35,11 +32,8 @@
 
         <Button
             android:id="@+id/btn_2"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(2)}"
@@ -51,11 +45,8 @@
 
         <Button
             android:id="@+id/btn_3"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(3)}"
@@ -67,11 +58,8 @@
 
         <Button
             android:id="@+id/btn_4"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(4)}"
@@ -83,11 +71,8 @@
 
         <Button
             android:id="@+id/btn_5"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(5)}"
@@ -99,11 +84,8 @@
 
         <Button
             android:id="@+id/btn_6"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(6)}"
@@ -115,11 +97,8 @@
 
         <Button
             android:id="@+id/btn_7"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(7)}"
@@ -131,11 +110,8 @@
 
         <Button
             android:id="@+id/btn_8"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(8)}"
@@ -147,11 +123,8 @@
 
         <Button
             android:id="@+id/btn_9"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(9)}"
@@ -163,11 +136,8 @@
 
         <Button
             android:id="@+id/btn_0"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addNumeral(0)}"
@@ -179,11 +149,8 @@
 
         <Button
             android:id="@+id/btn_dot"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addDot()}"
@@ -195,11 +162,8 @@
 
         <Button
             android:id="@+id/btn_del"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addBack()}"
@@ -211,11 +175,8 @@
 
         <Button
             android:id="@+id/btn_add"
-            btn_radius="@{bs.radius}"
-            btn_solidColor="@{bs.solidColor}"
             btn_spacing="@{bs.spacing}"
-            btn_strokeColor="@{bs.strokeColor}"
-            btn_strokeWidth="@{bs.strokeWidth}"
+            btn_style="@{bs}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{()->click.addPlus()}"

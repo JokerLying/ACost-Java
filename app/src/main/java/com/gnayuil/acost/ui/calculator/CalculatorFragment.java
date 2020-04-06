@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.gnayuil.acost.R;
-import com.gnayuil.acost.data.ButtonStyle;
+import com.gnayuil.acost.data.style.ButtonStyle;
 import com.gnayuil.acost.databinding.FragmentCalculatorBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 import com.gnayuil.acost.utils.DisplayUtils;
@@ -34,8 +34,8 @@ public class CalculatorFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mViewModel = getFragmentViewModelProvider(this).get(CalculatorViewModel.class);
     }
 

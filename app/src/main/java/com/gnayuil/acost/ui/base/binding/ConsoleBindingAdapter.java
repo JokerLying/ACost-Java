@@ -4,17 +4,18 @@ import android.graphics.drawable.GradientDrawable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.ColorInt;
 import androidx.databinding.BindingAdapter;
+
+import com.gnayuil.acost.data.style.ConsoleStyle;
 
 public class ConsoleBindingAdapter {
 
-    @BindingAdapter(value = {"console_radius", "console_solidColor", "console_strokeColor", "console_strokeWidth"}, requireAll = true)
-    public static void setBackground(TextView view, int radius, @ColorInt int solidColor, @ColorInt int strokeColor, int strokeWidth) {
+    @BindingAdapter(value = {"console_style"})
+    public static void setBackground(TextView view, ConsoleStyle style) {
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setCornerRadius(radius);
-        drawable.setColor(solidColor);
-        drawable.setStroke(strokeWidth, strokeColor);
+        drawable.setCornerRadius(style.getRadius());
+        drawable.setColor(style.getSolidColor());
+        drawable.setStroke(style.getStrokeWidth(), style.getStrokeColor());
         view.setBackground(drawable);
     }
 
