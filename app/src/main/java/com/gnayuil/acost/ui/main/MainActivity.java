@@ -35,7 +35,7 @@ public class MainActivity extends BaseActivity {
         mSharedViewModel.clickOne.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                mViewModel.addNumeral(s);
+                mViewModel.addChar(s);
             }
         });
 
