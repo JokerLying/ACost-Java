@@ -11,6 +11,7 @@ import com.gnayuil.acost.databinding.ActivityMainBinding;
 import com.gnayuil.acost.ui.base.BaseActivity;
 import com.gnayuil.acost.ui.calculator.CalculatorFragment;
 import com.gnayuil.acost.ui.information.InformationFragment;
+import com.gnayuil.acost.utils.DisplayUtils;
 
 public class MainActivity extends BaseActivity {
 
@@ -48,11 +49,11 @@ public class MainActivity extends BaseActivity {
 
     private ConsoleStyle getConsoleStyle() {
         ConsoleStyle cs = new ConsoleStyle();
-        cs.setRadius(8);
+        cs.setRadius(DisplayUtils.dp2px(4));
         cs.setSolidColor(0x88ffffff);
         cs.setStrokeColor(0x33666666);
         cs.setStrokeWidth(1);
-        cs.setSpacing(10);
+        cs.setSpacing(DisplayUtils.dp2px(5));
         return cs;
     }
 }

@@ -13,6 +13,7 @@ import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.ButtonStyle;
 import com.gnayuil.acost.databinding.FragmentCalculatorBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
+import com.gnayuil.acost.utils.DisplayUtils;
 
 public class CalculatorFragment extends BaseFragment {
 
@@ -40,11 +41,11 @@ public class CalculatorFragment extends BaseFragment {
 
     private ButtonStyle getButtonStyle() {
         ButtonStyle bs = new ButtonStyle();
-        bs.setRadius(8);
+        bs.setRadius(DisplayUtils.dp2px(4));
         bs.setSolidColor(0x88ffffff);
         bs.setStrokeColor(0x33666666);
         bs.setStrokeWidth(1);
-        bs.setSpacing(10);
+        bs.setSpacing(DisplayUtils.dp2px(5));
         return bs;
     }
 
