@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.gnayuil.acost.R;
-import com.gnayuil.acost.data.bean.ButtonStyle;
+import com.gnayuil.acost.data.ButtonStyle;
 import com.gnayuil.acost.databinding.FragmentCalculatorBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 
@@ -27,8 +27,8 @@ public class CalculatorFragment extends BaseFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_calculator, container, false);
-
         mBinding.setBs(getButtonStyle());
+        mBinding.setClick(new ClickProxy());
         return mBinding.getRoot();
     }
 
@@ -46,5 +46,24 @@ public class CalculatorFragment extends BaseFragment {
         bs.setStrokeWidth(1);
         bs.setSpacing(10);
         return bs;
+    }
+
+    public class ClickProxy {
+
+        public void addNumeral(int num) {
+            mSharedViewModel.clickOne.setValue(String.valueOf(num));
+        }
+
+        public void addDot() {
+            mSharedViewModel.clickOne.setValue(".");
+        }
+
+        public void addBack() {
+            mSharedViewModel.clickOne.setValue("DEL");
+        }
+
+        public void addPlus() {
+            mSharedViewModel.clickOne.setValue("+");
+        }
     }
 }

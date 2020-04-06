@@ -11,7 +11,7 @@ import com.gnayuil.acost.R;
 
 public class ButtonBindingAdapter {
 
-    @BindingAdapter(value = {"radius", "solidColor", "strokeColor", "strokeWidth"}, requireAll = true)
+    @BindingAdapter(value = {"btn_radius", "btn_solidColor", "btn_strokeColor", "btn_strokeWidth"}, requireAll = true)
     public static void setBackground(Button view, int radius, @ColorInt int solidColor, @ColorInt int strokeColor, int strokeWidth) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadius(radius);
@@ -20,7 +20,7 @@ public class ButtonBindingAdapter {
         view.setBackground(drawable);
     }
 
-    @BindingAdapter(value = {"spacing"})
+    @BindingAdapter(value = {"btn_spacing"})
     public static void setMargin(Button view, int spacing) {
         int value = spacing / 2;
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) view.getLayoutParams();

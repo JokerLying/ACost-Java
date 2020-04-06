@@ -1,4 +1,4 @@
-package com.gnayuil.acost.data.bean;
+package com.gnayuil.acost.data;
 
 import androidx.annotation.ColorInt;
 

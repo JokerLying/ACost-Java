@@ -32,7 +32,7 @@ public class App extends Application implements ViewModelStoreOwner {
         return app;
     }
 
-    public ViewModelProvider getViewModelProvider(Activity activity) {
+    public ViewModelProvider getAppViewModelProvider(Activity activity) {
         return new ViewModelProvider(this, getAppFactory());
     }
 
