@@ -110,14 +110,18 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
 
     private void numeral(InfoItem item, String num) {
         String[] cost = item.getLambda().split("\\+");
-        if ("0".equals(cost[cost.length - 1].substring(cost[cost.length - 1].length() - 1))) {
-            if (cost.length > 1) {
+        if (cost.length > 1) {
+            if ("0".equals(cost[cost.length - 1].substring(cost[cost.length - 1].length() - 1)) && cost[cost.length - 1].length() == 1) {
                 item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + num);
             } else {
-                item.setLambda(num);
+                item.setLambda(item.getLambda() + num);
             }
         } else {
-            item.setLambda(item.getLambda() + num);
+            if ("0".equals(item.getLambda())) {
+                item.setLambda(num);
+            } else {
+                item.setLambda(item.getLambda() + num);
+            }
         }
     }
 
