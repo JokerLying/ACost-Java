@@ -35,7 +35,7 @@ public class MainViewModel extends ViewModel {
     }
 
     private void plus() {
-
+        console.setValue("0");
     }
 
     private void dot() {

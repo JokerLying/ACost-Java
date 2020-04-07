@@ -1,7 +1,6 @@
 package com.gnayuil.acost.ui.information;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +64,11 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
 
     private void plus(InfoItem item) {
         if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
-            item.setLambda(item.getLambda() + "+0");
+            if (item.getLambda().lastIndexOf(".") == item.getLambda().length() - 1) {
+                item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + "+0");
+            } else {
+                item.setLambda(item.getLambda() + "+0");
+            }
         }
     }
 
@@ -77,11 +80,31 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     }
 
     private void del(InfoItem item) {
-        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
-            item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
+        String[] cost = item.getLambda().split("\\+");
+        if (cost.length > 1) {
+
+        } else {
+
         }
-        if (TextUtils.isEmpty(item.getLambda())) {
-            item.setLambda("0");
+
+        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
+            if (cost.length > 1) {
+                if (cost[cost.length - 1].length() == 1) {
+                    if ("0".equals(cost[cost.length - 1])) {
+                        item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 2));
+                    } else {
+                        item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + "0");
+                    }
+                } else {
+                    item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
+                }
+            } else {
+                if (item.getLambda().length() == 1) {
+                    item.setLambda("0");
+                } else {
+                    item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
+                }
+            }
         }
     }
 
