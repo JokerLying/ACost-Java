@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 
 import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.bean.InfoItem;
@@ -21,6 +22,8 @@ public class InformationFragment extends BaseFragment {
 
     private FragmentInformationBinding mBinding;
     private InformationViewModel mViewModel;
+
+    private InfoAdapter adapter;
 
     public static InformationFragment newInstance() {
         return new InformationFragment();
@@ -38,7 +41,7 @@ public class InformationFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = getFragmentViewModelProvider(this).get(InformationViewModel.class);
 
-        InfoAdapter adapter = new InfoAdapter(getActivity());
+        adapter = new InfoAdapter(getActivity());
         List<InfoItem> infoList = new ArrayList<>();
         InfoItem realCost = new InfoItem();
         realCost.setCheck(true);
@@ -49,6 +52,13 @@ public class InformationFragment extends BaseFragment {
         infoList.add(packetOne);
         adapter.setList(infoList);
         mBinding.rvInfo.setAdapter(adapter);
+
+        mSharedViewModel.clickOne.observe(mActivity, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                adapter.setLambda(s);
+            }
+        });
     }
 
 }

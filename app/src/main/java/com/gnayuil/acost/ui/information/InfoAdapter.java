@@ -1,10 +1,13 @@
 package com.gnayuil.acost.ui.information;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gnayuil.acost.R;
@@ -32,11 +35,74 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         this.mList = list;
     }
 
+    public void setLambda(String lambda) {
+        for (InfoItem one :
+                mList) {
+            if (one.isCheck()) {
+                addChar(one, lambda);
+                notifyDataSetChanged();
+                break;
+            }
+        }
+    }
+
+    private void addChar(InfoItem item, String str) {
+        switch (str) {
+            case "+":
+                plus(item);
+                break;
+            case ".":
+                dot(item);
+                break;
+            case "DEL":
+                del(item);
+                break;
+            default:
+                numeral(item, str);
+                break;
+        }
+    }
+
+    private void plus(InfoItem item) {
+        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
+            item.setLambda(item.getLambda() + "+0");
+        }
+    }
+
+    private void dot(InfoItem item) {
+        String[] cost = item.getLambda().split("\\+");
+        if (!cost[cost.length - 1].contains(".")) {
+            item.setLambda(item.getLambda() + ".");
+        }
+    }
+
+    private void del(InfoItem item) {
+        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
+            item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
+        }
+        if (TextUtils.isEmpty(item.getLambda())) {
+            item.setLambda("0");
+        }
+    }
+
+    private void numeral(InfoItem item, String num) {
+        String[] cost = item.getLambda().split("\\+");
+        if ("0".equals(cost[cost.length - 1].substring(cost[cost.length - 1].length() - 1))) {
+            if (cost.length > 1) {
+                item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + num);
+            } else {
+                item.setLambda(num);
+            }
+        } else {
+            item.setLambda(item.getLambda() + num);
+        }
+    }
+
     @NonNull
     @Override
     public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         AdapterInfoItemBinding binding = AdapterInfoItemBinding.inflate(LayoutInflater.from(mContext), parent, false);
-        return new InfoViewHolder(binding);
+        return new InfoViewHolder(binding.getRoot());
     }
 
     @Override
@@ -53,9 +119,24 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
                 item.setTitle(mContext.getResources().getString(R.string.packet, String.valueOf(holder.getAdapterPosition() - 1)));
                 break;
         }
-        holder.getBinding().setItem(item);
-        holder.getBinding().setIs(getInfoStyle());
-        holder.getBinding().executePendingBindings();
+        AdapterInfoItemBinding binding = DataBindingUtil.getBinding(holder.itemView);
+        if (binding == null) {
+            return;
+        }
+        binding.setItem(item);
+        binding.setIs(getInfoStyle());
+        binding.executePendingBindings();
+        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for (InfoItem one :
+                        mList) {
+                    one.setCheck(false);
+                }
+                item.setCheck(true);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -75,15 +156,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     }
 
     public class InfoViewHolder extends RecyclerView.ViewHolder {
-        private AdapterInfoItemBinding mBinding;
 
-        public InfoViewHolder(@NonNull AdapterInfoItemBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
-        }
-
-        public AdapterInfoItemBinding getBinding() {
-            return mBinding;
+        public InfoViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 
