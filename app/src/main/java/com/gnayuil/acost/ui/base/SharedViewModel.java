@@ -15,6 +15,14 @@ public class SharedViewModel extends ViewModel {
     private MutableLiveData<List<InfoItem>> infoList = new MutableLiveData<>();
 
     public SharedViewModel() {
+        initData();
+    }
+
+    public MutableLiveData<List<InfoItem>> getInfoList() {
+        return infoList;
+    }
+
+    private void initData() {
         List<InfoItem> infoList = new ArrayList<>();
         InfoItem realCost = new InfoItem();
         realCost.setCheck(true);
@@ -26,11 +34,10 @@ public class SharedViewModel extends ViewModel {
         this.infoList.setValue(infoList);
     }
 
-    public MutableLiveData<List<InfoItem>> getInfoList() {
-        return infoList;
-    }
-
     public void clickOne(String str) {
+        if (infoList.getValue() == null) {
+            initData();
+        }
         InfoItem item = new InfoItem();
         for (InfoItem one :
                 infoList.getValue()) {
