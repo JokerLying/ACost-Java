@@ -64,7 +64,7 @@ public class SharedViewModel extends ViewModel {
                 cost) {
             result = result.add(new BigDecimal(one.lastIndexOf(".") == one.length() - 1 ? one + "0" : one));
         }
-        DecimalFormat format = new DecimalFormat("0.00");
+        DecimalFormat format = new DecimalFormat("0.##");
         item.setConsole(format.format(result));
     }
 
