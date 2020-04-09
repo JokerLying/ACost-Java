@@ -2,9 +2,15 @@ package com.gnayuil.acost.data.bean;
 
 public class InfoItem {
     private boolean check;
-    private String console = "0";
-    private String lambda = "0";
+    private String console;
+    private String lambda;
     private String title;
+
+    public InfoItem() {
+        check = false;
+        console = "0";
+        lambda = "0";
+    }
 
     public boolean isCheck() {
         return check;

@@ -15,7 +15,6 @@ import com.gnayuil.acost.data.bean.InfoItem;
 import com.gnayuil.acost.databinding.FragmentInformationBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InformationFragment extends BaseFragment {
@@ -42,21 +41,13 @@ public class InformationFragment extends BaseFragment {
         mViewModel = getFragmentViewModelProvider(this).get(InformationViewModel.class);
 
         adapter = new InfoAdapter(getActivity());
-        List<InfoItem> infoList = new ArrayList<>();
-        InfoItem realCost = new InfoItem();
-        realCost.setCheck(true);
-        infoList.add(realCost);
-        InfoItem originalCost = new InfoItem();
-        infoList.add(originalCost);
-        InfoItem packetOne = new InfoItem();
-        infoList.add(packetOne);
-        adapter.setList(infoList);
         mBinding.rvInfo.setAdapter(adapter);
 
-        mSharedViewModel.clickOne.observe(mActivity, new Observer<String>() {
+        mSharedViewModel.getInfoList().observe(mActivity, new Observer<List<InfoItem>>() {
             @Override
-            public void onChanged(String s) {
-                adapter.setLambda(s);
+            public void onChanged(List<InfoItem> infoItems) {
+                adapter.setList(infoItems);
+                adapter.notifyDataSetChanged();
             }
         });
     }

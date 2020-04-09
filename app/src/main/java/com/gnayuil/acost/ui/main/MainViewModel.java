@@ -1,9 +1,11 @@
 package com.gnayuil.acost.ui.main;
 
-import android.text.TextUtils;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.gnayuil.acost.data.bean.InfoItem;
+
+import java.util.List;
 
 public class MainViewModel extends ViewModel {
 
@@ -17,54 +19,12 @@ public class MainViewModel extends ViewModel {
         return console;
     }
 
-    public void addChar(String str) {
-        switch (str) {
-            case "+":
-                plus();
-                break;
-            case ".":
-                dot();
-                break;
-            case "DEL":
-                del();
-                break;
-            default:
-                numeral(str);
-                break;
+    public void setInfoList(List<InfoItem> infoItems) {
+        for (InfoItem one : infoItems) {
+            if (one.isCheck()) {
+                String[] cost = one.getLambda().split("\\+");
+                console.setValue(cost[cost.length - 1]);
+            }
         }
     }
-
-    private void plus() {
-        console.setValue("0");
-    }
-
-    private void dot() {
-        if (console.getValue() == null) {
-            return;
-        }
-        if (!console.getValue().contains(".")) {
-            console.setValue(console.getValue() + ".");
-        }
-    }
-
-    private void del() {
-        if (console.getValue() == null) {
-            return;
-        }
-        if (console.getValue().length() > 0) {
-            console.setValue(console.getValue().substring(0, console.getValue().length() - 1));
-        }
-        if (TextUtils.isEmpty(console.getValue())) {
-            console.setValue("0");
-        }
-    }
-
-    private void numeral(String num) {
-        if ("0".equals(console.getValue())) {
-            console.setValue(num);
-        } else {
-            console.setValue(console.getValue() + num);
-        }
-    }
-
 }

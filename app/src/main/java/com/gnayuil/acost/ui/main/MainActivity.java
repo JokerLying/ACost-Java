@@ -6,12 +6,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
 import com.gnayuil.acost.R;
+import com.gnayuil.acost.data.bean.InfoItem;
 import com.gnayuil.acost.data.style.ConsoleStyle;
 import com.gnayuil.acost.databinding.ActivityMainBinding;
 import com.gnayuil.acost.ui.base.BaseActivity;
 import com.gnayuil.acost.ui.calculator.CalculatorFragment;
 import com.gnayuil.acost.ui.information.InformationFragment;
 import com.gnayuil.acost.utils.DisplayUtils;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
@@ -32,10 +35,10 @@ public class MainActivity extends BaseActivity {
                     .commitNow();
         }
 
-        mSharedViewModel.clickOne.observe(this, new Observer<String>() {
+        mSharedViewModel.getInfoList().observe(this, new Observer<List<InfoItem>>() {
             @Override
-            public void onChanged(String s) {
-                mViewModel.addChar(s);
+            public void onChanged(List<InfoItem> infoItems) {
+                mViewModel.setInfoList(infoItems);
             }
         });
 

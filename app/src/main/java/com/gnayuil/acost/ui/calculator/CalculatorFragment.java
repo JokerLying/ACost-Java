@@ -52,19 +52,19 @@ public class CalculatorFragment extends BaseFragment {
     public class ClickProxy {
 
         public void addNumeral(int num) {
-            mSharedViewModel.clickOne.setValue(String.valueOf(num));
+            mSharedViewModel.clickOne(String.valueOf(num));
         }
 
         public void addDot() {
-            mSharedViewModel.clickOne.setValue(".");
+            mSharedViewModel.clickOne(".");
         }
 
         public void addBack() {
-            mSharedViewModel.clickOne.setValue("DEL");
+            mSharedViewModel.clickOne("DEL");
         }
 
         public void addPlus() {
-            mSharedViewModel.clickOne.setValue("+");
+            mSharedViewModel.clickOne("+");
         }
     }
 }

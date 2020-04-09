@@ -34,97 +34,6 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         this.mList = list;
     }
 
-    public void setLambda(String lambda) {
-        for (InfoItem one :
-                mList) {
-            if (one.isCheck()) {
-                addChar(one, lambda);
-                notifyDataSetChanged();
-                break;
-            }
-        }
-    }
-
-    private void addChar(InfoItem item, String str) {
-        switch (str) {
-            case "+":
-                plus(item);
-                break;
-            case ".":
-                dot(item);
-                break;
-            case "DEL":
-                del(item);
-                break;
-            default:
-                numeral(item, str);
-                break;
-        }
-    }
-
-    private void plus(InfoItem item) {
-        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
-            if (item.getLambda().lastIndexOf(".") == item.getLambda().length() - 1) {
-                item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + "+0");
-            } else {
-                item.setLambda(item.getLambda() + "+0");
-            }
-        }
-    }
-
-    private void dot(InfoItem item) {
-        String[] cost = item.getLambda().split("\\+");
-        if (!cost[cost.length - 1].contains(".")) {
-            item.setLambda(item.getLambda() + ".");
-        }
-    }
-
-    private void del(InfoItem item) {
-        String[] cost = item.getLambda().split("\\+");
-        if (cost.length > 1) {
-
-        } else {
-
-        }
-
-        if (item.getLambda().lastIndexOf("+") != item.getLambda().length() - 1) {
-            if (cost.length > 1) {
-                if (cost[cost.length - 1].length() == 1) {
-                    if ("0".equals(cost[cost.length - 1])) {
-                        item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 2));
-                    } else {
-                        item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + "0");
-                    }
-                } else {
-                    item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
-                }
-            } else {
-                if (item.getLambda().length() == 1) {
-                    item.setLambda("0");
-                } else {
-                    item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1));
-                }
-            }
-        }
-    }
-
-    private void numeral(InfoItem item, String num) {
-        String[] cost = item.getLambda().split("\\+");
-        if (cost.length > 1) {
-            if ("0".equals(cost[cost.length - 1].substring(cost[cost.length - 1].length() - 1)) && cost[cost.length - 1].length() == 1) {
-                item.setLambda(item.getLambda().substring(0, item.getLambda().length() - 1) + num);
-            } else {
-                item.setLambda(item.getLambda() + num);
-            }
-        } else {
-            if ("0".equals(item.getLambda())) {
-                item.setLambda(num);
-            } else {
-                item.setLambda(item.getLambda() + num);
-            }
-        }
-    }
-
     @NonNull
     @Override
     public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -152,7 +61,6 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         }
         binding.setItem(item);
         binding.setIs(getInfoStyle());
-        binding.executePendingBindings();
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
