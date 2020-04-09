@@ -38,14 +38,15 @@ public class SharedViewModel extends ViewModel {
         if (infoList.getValue() == null) {
             initData();
         }
-        InfoItem item = new InfoItem();
-        for (InfoItem one :
-                infoList.getValue()) {
+        int location = 0;
+        for (int i = 0; i < infoList.getValue().size(); i++) {
+            InfoItem one = infoList.getValue().get(i);
             if (one.isCheck()) {
-                item = one;
+                location = i;
                 break;
             }
         }
+        InfoItem item = infoList.getValue().get(location);
         switch (str) {
             case "+":
                 plus(item);
@@ -73,6 +74,22 @@ public class SharedViewModel extends ViewModel {
         }
         DecimalFormat format = new DecimalFormat("0.##");
         item.setConsole(format.format(result));
+
+        if (infoList.getValue() == null) {
+            return;
+        }
+        String realCost = infoList.getValue().get(0).getConsole();
+        String originalCost = infoList.getValue().get(1).getConsole();
+        if ("0".equals(realCost) || "0".equals(originalCost)) {
+            return;
+        }
+        for (int i = 2; i < infoList.getValue().size(); i++) {
+            InfoItem one = infoList.getValue().get(i);
+            BigDecimal console = new BigDecimal(one.getConsole());
+            console = console.divide(new BigDecimal(originalCost), 4, BigDecimal.ROUND_HALF_UP);
+            console = console.multiply(new BigDecimal(realCost));
+            one.setConsole(format.format(console));
+        }
     }
 
     private void plus(InfoItem item) {
