@@ -12,38 +12,81 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.bean.InfoItem;
 import com.gnayuil.acost.data.style.InfoStyle;
+import com.gnayuil.acost.databinding.AdapterInfoAddBinding;
 import com.gnayuil.acost.databinding.AdapterInfoItemBinding;
 import com.gnayuil.acost.utils.DisplayUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
 
     private Context mContext;
     private List<InfoItem> mList;
+    private int selectedPosition;
+    private static final int TYPE_NORMAL = 1;
+    private static final int TYPE_ADD = 2;
+    private OnItemClickListener onItemClickListener;
 
-    public InfoAdapter(Context context) {
-        this.mContext = context;
+    public interface OnItemClickListener {
+        void onAddClick();
     }
 
-    public List<InfoItem> getList() {
-        return mList;
+    public InfoAdapter(Context mContext, OnItemClickListener onItemClickListener) {
+        this.mContext = mContext;
+        this.onItemClickListener = onItemClickListener;
+        selectedPosition = 0;
     }
 
     public void setList(List<InfoItem> list) {
-        this.mList = list;
+        if (mList == null) {
+            mList = new ArrayList<>();
+        }
+        mList.clear();
+        mList.addAll(list);
+        InfoItem add = new InfoItem();
+        add.setType(InfoItem.ItemType.ADD);
+        mList.add(add);
+        notifyItemChanged(selectedPosition);
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        InfoItem item = mList.get(position);
+        if (item.getType() == InfoItem.ItemType.NORMAL) {
+            return TYPE_NORMAL;
+        } else {
+            return TYPE_ADD;
+        }
     }
 
     @NonNull
     @Override
     public InfoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AdapterInfoItemBinding binding = AdapterInfoItemBinding.inflate(LayoutInflater.from(mContext), parent, false);
-        return new InfoViewHolder(binding.getRoot());
+        if (viewType == TYPE_NORMAL) {
+            AdapterInfoItemBinding binding = AdapterInfoItemBinding.inflate(LayoutInflater.from(mContext), parent, false);
+            return new InfoViewHolder(binding.getRoot());
+        } else {
+            AdapterInfoAddBinding binding = AdapterInfoAddBinding.inflate(LayoutInflater.from(mContext), parent, false);
+            return new InfoViewHolder(binding.getRoot());
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull InfoViewHolder holder, int position) {
+        switch (holder.getItemViewType()) {
+            case TYPE_NORMAL:
+                initNormalItem(holder);
+                break;
+            case TYPE_ADD:
+                initAddItem(holder);
+                break;
+        }
+    }
+
+    private void initNormalItem(InfoViewHolder holder) {
         final InfoItem item = mList.get(holder.getAdapterPosition());
+        final int position = holder.getAdapterPosition();
         switch (holder.getAdapterPosition()) {
             case 0:
                 item.setTitle(mContext.getResources().getString(R.string.realCost));
@@ -64,12 +107,33 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                for (InfoItem one :
-                        mList) {
-                    one.setCheck(false);
-                }
-                item.setCheck(true);
-                notifyDataSetChanged();
+                mList.get(selectedPosition).setCheck(false);
+                notifyItemChanged(selectedPosition);
+                selectedPosition = position;
+                mList.get(selectedPosition).setCheck(true);
+                notifyItemChanged(selectedPosition);
+            }
+        });
+    }
+
+    private void initAddItem(InfoViewHolder holder) {
+        AdapterInfoAddBinding binding = DataBindingUtil.getBinding(holder.itemView);
+        if (binding == null) {
+            return;
+        }
+        binding.setIs(getInfoStyle());
+        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onItemClickListener.onAddClick();
+                notifyItemInserted(mList.size() - 2);
+                notifyItemRangeChanged(mList.size() - 2, 2);
+
+                mList.get(selectedPosition).setCheck(false);
+                notifyItemChanged(selectedPosition);
+                selectedPosition = mList.size() - 2;
+                mList.get(selectedPosition).setCheck(true);
+                notifyItemChanged(selectedPosition);
             }
         });
     }

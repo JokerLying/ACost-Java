@@ -22,6 +22,14 @@ public class SharedViewModel extends ViewModel {
         return infoList;
     }
 
+    public void addItem() {
+        if (infoList.getValue() == null) {
+            initData();
+        }
+        infoList.getValue().add(new InfoItem());
+        infoList.setValue(infoList.getValue());
+    }
+
     private void initData() {
         List<InfoItem> infoList = new ArrayList<>();
         InfoItem realCost = new InfoItem();

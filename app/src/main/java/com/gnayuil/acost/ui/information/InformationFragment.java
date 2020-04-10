@@ -40,14 +40,18 @@ public class InformationFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = getFragmentViewModelProvider(this).get(InformationViewModel.class);
 
-        adapter = new InfoAdapter(getActivity());
+        adapter = new InfoAdapter(getActivity(), new InfoAdapter.OnItemClickListener() {
+            @Override
+            public void onAddClick() {
+                mSharedViewModel.addItem();
+            }
+        });
         mBinding.rvInfo.setAdapter(adapter);
 
         mSharedViewModel.getInfoList().observe(mActivity, new Observer<List<InfoItem>>() {
             @Override
             public void onChanged(List<InfoItem> infoItems) {
                 adapter.setList(infoItems);
-                adapter.notifyDataSetChanged();
             }
         });
     }

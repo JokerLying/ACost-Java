@@ -9,7 +9,7 @@ import com.gnayuil.acost.data.style.InfoStyle;
 
 public class InfoBindingAdapter {
 
-    @BindingAdapter(value = {"info_style", "info_check"}, requireAll = true)
+    @BindingAdapter(value = {"info_style", "info_check"}, requireAll = false)
     public static void setBackground(View view, InfoStyle style, boolean check) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setCornerRadius(style.getRadius());

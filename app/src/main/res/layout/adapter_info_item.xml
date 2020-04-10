@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/layout_info_item_console"
             info_check="@{item.check}"
             info_style="@{is}"
@@ -35,21 +35,24 @@
                 android:id="@+id/tv_info_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.title}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@{item.title}" />
 
             <TextView
                 android:id="@+id/tv_info_item_console"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/tv_info_item_title"
+                android:ellipsize="start"
+                android:singleLine="true"
                 android:text="@{item.console}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textAlignment="viewEnd" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_info_item_lambda"

@@ -5,11 +5,17 @@ public class InfoItem {
     private String console;
     private String lambda;
     private String title;
+    private ItemType type;
+
+    public enum ItemType {
+        NORMAL, ADD
+    }
 
     public InfoItem() {
         check = false;
         console = "0";
         lambda = "0";
+        type = ItemType.NORMAL;
     }
 
     public boolean isCheck() {
@@ -42,5 +48,13 @@ public class InfoItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public ItemType getType() {
+        return type;
+    }
+
+    public void setType(ItemType type) {
+        this.type = type;
     }
 }
