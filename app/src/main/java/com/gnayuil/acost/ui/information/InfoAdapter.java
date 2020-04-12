@@ -47,7 +47,8 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         InfoItem add = new InfoItem();
         add.setType(InfoItem.ItemType.ADD);
         mList.add(add);
-        notifyItemChanged(selectedPosition);
+//        notifyItemChanged(selectedPosition);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -87,16 +88,10 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     private void initNormalItem(InfoViewHolder holder) {
         final InfoItem item = mList.get(holder.getAdapterPosition());
         final int position = holder.getAdapterPosition();
-        switch (holder.getAdapterPosition()) {
-            case 0:
-                item.setTitle(mContext.getResources().getString(R.string.realCost));
-                break;
-            case 1:
-                item.setTitle(mContext.getResources().getString(R.string.originalCost));
-                break;
-            default:
-                item.setTitle(mContext.getResources().getString(R.string.packet, String.valueOf(holder.getAdapterPosition() - 1)));
-                break;
+        if (holder.getAdapterPosition() == 0) {
+            item.setTitle(mContext.getResources().getString(R.string.realCost));
+        } else {
+            item.setTitle(mContext.getResources().getString(R.string.packet, String.valueOf(holder.getAdapterPosition())));
         }
         AdapterInfoItemBinding binding = DataBindingUtil.getBinding(holder.itemView);
         if (binding == null) {

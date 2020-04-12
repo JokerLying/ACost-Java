@@ -14,6 +14,8 @@ public class SharedViewModel extends ViewModel {
 
     private MutableLiveData<List<InfoItem>> infoList = new MutableLiveData<>();
 
+    private DecimalFormat costFormat = new DecimalFormat("0.##");
+
     public SharedViewModel() {
         initData();
     }
@@ -35,8 +37,6 @@ public class SharedViewModel extends ViewModel {
         InfoItem realCost = new InfoItem();
         realCost.setCheck(true);
         infoList.add(realCost);
-        InfoItem originalCost = new InfoItem();
-        infoList.add(originalCost);
         InfoItem packetOne = new InfoItem();
         infoList.add(packetOne);
         this.infoList.setValue(infoList);
@@ -69,34 +69,43 @@ public class SharedViewModel extends ViewModel {
                 numeral(item, str);
                 break;
         }
-        calculateCost(item);
+        item.setConsole(costFormat.format(calculateCost(item)));
+        updatePacketsCost();
         infoList.setValue(infoList.getValue());
     }
 
-    private void calculateCost(InfoItem item) {
+    private BigDecimal calculateCost(InfoItem item) {
         String[] cost = item.getLambda().split("\\+");
         BigDecimal result = new BigDecimal("0");
         for (String one :
                 cost) {
             result = result.add(new BigDecimal(one.lastIndexOf(".") == one.length() - 1 ? one + "0" : one));
         }
-        DecimalFormat format = new DecimalFormat("0.##");
-        item.setConsole(format.format(result));
+        return result;
+    }
 
+    private void updatePacketsCost() {
         if (infoList.getValue() == null) {
             return;
         }
         String realCost = infoList.getValue().get(0).getConsole();
-        String originalCost = infoList.getValue().get(1).getConsole();
-        if ("0".equals(realCost) || "0".equals(originalCost)) {
+        if ("0".equals(realCost)) {
             return;
         }
+        BigDecimal allPacket = calculateCost(infoList.getValue().get(1));
         for (int i = 2; i < infoList.getValue().size(); i++) {
             InfoItem one = infoList.getValue().get(i);
-            BigDecimal console = new BigDecimal(one.getConsole());
-            console = console.divide(new BigDecimal(originalCost), 4, BigDecimal.ROUND_HALF_UP);
+            allPacket = allPacket.add(calculateCost(one));
+        }
+        if (allPacket.floatValue() == 0) {
+            return;
+        }
+        for (int i = 1; i < infoList.getValue().size(); i++) {
+            InfoItem one = infoList.getValue().get(i);
+            BigDecimal console = calculateCost(one);
+            console = console.divide(allPacket, 4, BigDecimal.ROUND_HALF_UP);
             console = console.multiply(new BigDecimal(realCost));
-            one.setConsole(format.format(console));
+            one.setConsole(costFormat.format(console));
         }
     }
 
