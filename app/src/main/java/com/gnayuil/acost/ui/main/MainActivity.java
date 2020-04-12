@@ -2,13 +2,13 @@ package com.gnayuil.acost.ui.main;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.lib.widget.snackbar.Snackbar;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
-import com.gnayuil.acost.App;
 import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.bean.InfoItem;
 import com.gnayuil.acost.data.bean.Setting;
@@ -59,7 +59,8 @@ public class MainActivity extends BaseActivity {
             mBinding.swSlideSettingAdvanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                    App.getApp().advancedMode = checked;
+                    mBinding.swSlideSettingAdvanced.setChecked(false);
+                    Snackbar.with(MainActivity.this).setText(getString(R.string.advanced_mode_tip)).show();
                 }
             });
             mBinding.swSlideSettingDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -92,7 +93,7 @@ public class MainActivity extends BaseActivity {
         }
         Setting setting = new Setting();
         setting.setVersionName(getString(R.string.version, versionName));
-        setting.setAdvanced(App.getApp().advancedMode);
+        setting.setAdvanced(false);
         setting.setDarkMode(mViewModel.getDarkMode());
         return setting;
     }

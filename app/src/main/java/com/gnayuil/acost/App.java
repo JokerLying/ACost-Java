@@ -14,8 +14,6 @@ public class App extends Application implements ViewModelStoreOwner {
     private ViewModelProvider.Factory factory;
     private ViewModelStore viewModelStore;
 
-    public boolean advancedMode;
-
     @Override
     public void onCreate() {
         super.onCreate();
