@@ -14,6 +14,8 @@
     <string name="key_add">+</string>
     <string name="key_del">DEL</string>
 
+    <string name="add_packet">新的篮子</string>
+
     <string name="realCost">实际金额</string>
     <string name="originalCost">满减前金额</string>
     <string name="packet">%1$s号篮子</string>
