@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,41 +13,154 @@
             type="com.gnayuil.acost.ui.main.MainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_console"
-            console_spacing="@{cs.spacing}"
-            console_style="@{cs}"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:ellipsize="start"
-            android:gravity="center|end"
-            android:paddingStart="5dp"
-            android:paddingEnd="5dp"
-            android:singleLine="true"
-            android:text="@{vm.console}"
-            android:textSize="16sp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/frame_calculator"
+            <TextView
+                android:id="@+id/tv_console"
+                console_spacing="@{cs.spacing}"
+                console_style="@{cs}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4" />
+                android:layout_height="48dp"
+                android:ellipsize="start"
+                android:gravity="center|end"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:singleLine="true"
+                android:text="@{vm.console}"
+                android:textSize="16sp" />
 
-            <FrameLayout
-                android:id="@+id/frame_information"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frame_calculator"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4" />
+
+                <FrameLayout
+                    android:id="@+id/frame_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="6" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#FFF"
+            android:fitsSystemWindows="true">
+
+            <ImageView
+                android:id="@+id/iv_slide_top_bg"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#b5dd5c"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_slide_logo"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:cardCornerRadius="50dp"
+                app:layout_constraintBottom_toBottomOf="@id/iv_slide_top_bg"
+                app:layout_constraintEnd_toEndOf="@id/iv_slide_top_bg"
+                app:layout_constraintStart_toStartOf="@id/iv_slide_top_bg"
+                app:layout_constraintTop_toTopOf="@id/iv_slide_top_bg"
+                app:layout_constraintVertical_bias="0.4">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_slide_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@string/version"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cv_slide_logo" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_slide_setting_advanced"
+                style="@style/SettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/setting_advanced"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_slide_top_bg"
+                app:switchMinWidth="50dp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_slide_setting_dark_mode"
+                style="@style/SettingTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/setting_dark_mode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sw_slide_setting_advanced"
+                app:switchMinWidth="50dp" />
+
+            <TextView
+                android:id="@+id/tv_slide_setting_language"
+                style="@style/SettingTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/setting_language"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sw_slide_setting_dark_mode" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_slide_setting_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:entries="@array/language"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sw_slide_setting_dark_mode" />
+
+            <TextView
+                style="@style/Copyright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/copyright"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
 </layout>

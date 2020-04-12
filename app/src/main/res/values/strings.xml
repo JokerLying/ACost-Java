@@ -17,4 +17,12 @@
     <string name="realCost">实际金额</string>
     <string name="originalCost">满减前金额</string>
     <string name="packet">%1$s号篮子</string>
+
+    <string name="setting_advanced">高级模式</string>
+    <string name="setting_dark_mode">黑暗模式</string>
+    <string name="setting_language">语言</string>
+
+    <string name="version">当前版本：%1$s</string>
+
+    <string name="copyright">Product with love by GnayUil</string>
 </resources>
