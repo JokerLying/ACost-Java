@@ -1,5 +1,7 @@
 package com.gnayuil.acost.ui.main;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -7,6 +9,7 @@ import androidx.lifecycle.Observer;
 
 import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.bean.InfoItem;
+import com.gnayuil.acost.data.bean.Setting;
 import com.gnayuil.acost.data.style.ConsoleStyle;
 import com.gnayuil.acost.databinding.ActivityMainBinding;
 import com.gnayuil.acost.ui.base.BaseActivity;
@@ -28,6 +31,7 @@ public class MainActivity extends BaseActivity {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mBinding.setLifecycleOwner(this);
         mBinding.setCs(getConsoleStyle());
+        mBinding.setSetting(getSetting());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_calculator, CalculatorFragment.newInstance())
@@ -58,5 +62,20 @@ public class MainActivity extends BaseActivity {
         cs.setStrokeWidth(1);
         cs.setSpacing(DisplayUtils.dp2px(5));
         return cs;
+    }
+
+    private Setting getSetting() {
+        String versionName = "error";
+        try {
+            PackageManager packageManager = getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            versionName = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        Setting setting = new Setting();
+        setting.setVersionName(getString(R.string.version, versionName));
+        setting.setAdvanced(true);
+        return setting;
     }
 }
