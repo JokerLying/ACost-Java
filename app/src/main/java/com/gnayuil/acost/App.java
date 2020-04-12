@@ -10,9 +10,11 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 public class App extends Application implements ViewModelStoreOwner {
 
-    private static Application app;
+    private static App app;
     private ViewModelProvider.Factory factory;
     private ViewModelStore viewModelStore;
+
+    public boolean advancedMode;
 
     @Override
     public void onCreate() {
@@ -28,7 +30,7 @@ public class App extends Application implements ViewModelStoreOwner {
         return viewModelStore;
     }
 
-    public static Application getApp() {
+    public static App getApp() {
         return app;
     }
 
