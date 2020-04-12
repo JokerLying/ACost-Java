@@ -6,9 +6,14 @@ public class InfoItem {
     private String lambda;
     private String title;
     private ItemType type;
+    private ItemStatus status;
 
     public enum ItemType {
         NORMAL, ADD
+    }
+
+    public enum ItemStatus {
+        NONE, MODIFY, ADD
     }
 
     public InfoItem() {
@@ -16,6 +21,7 @@ public class InfoItem {
         console = "0";
         lambda = "0";
         type = ItemType.NORMAL;
+        status = ItemStatus.NONE;
     }
 
     public boolean isCheck() {
@@ -56,5 +62,13 @@ public class InfoItem {
 
     public void setType(ItemType type) {
         this.type = type;
+    }
+
+    public ItemStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ItemStatus status) {
+        this.status = status;
     }
 }

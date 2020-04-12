@@ -46,9 +46,19 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         mList.addAll(list);
         InfoItem add = new InfoItem();
         add.setType(InfoItem.ItemType.ADD);
+        add.setStatus(InfoItem.ItemStatus.NONE);
         mList.add(add);
-//        notifyItemChanged(selectedPosition);
-        notifyDataSetChanged();
+        for (int i = 0; i < mList.size(); i++) {
+            InfoItem one = mList.get(i);
+            if (one.getStatus() == InfoItem.ItemStatus.MODIFY) {
+                one.setStatus(InfoItem.ItemStatus.NONE);
+                notifyItemChanged(i);
+            } else if (one.getStatus() == InfoItem.ItemStatus.ADD) {
+                one.setStatus(InfoItem.ItemStatus.NONE);
+                notifyItemInserted(i);
+                notifyItemChanged(mList.size() - 1);
+            }
+        }
     }
 
     @Override

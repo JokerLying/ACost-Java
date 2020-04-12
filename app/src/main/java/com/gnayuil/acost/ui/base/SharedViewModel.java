@@ -28,7 +28,9 @@ public class SharedViewModel extends ViewModel {
         if (infoList.getValue() == null) {
             initData();
         }
-        infoList.getValue().add(new InfoItem());
+        InfoItem addOne = new InfoItem();
+        addOne.setStatus(InfoItem.ItemStatus.ADD);
+        infoList.getValue().add(addOne);
         infoList.setValue(infoList.getValue());
     }
 
@@ -69,6 +71,7 @@ public class SharedViewModel extends ViewModel {
                 numeral(item, str);
                 break;
         }
+        item.setStatus(InfoItem.ItemStatus.MODIFY);
         item.setConsole(costFormat.format(calculateCost(item)));
         updatePacketsCost();
         infoList.setValue(infoList.getValue());
@@ -105,7 +108,10 @@ public class SharedViewModel extends ViewModel {
             BigDecimal console = calculateCost(one);
             console = console.divide(allPacket, 4, BigDecimal.ROUND_HALF_UP);
             console = console.multiply(new BigDecimal(realCost));
-            one.setConsole(costFormat.format(console));
+            if (!costFormat.format(console).equals(one.getConsole())) {
+                one.setConsole(costFormat.format(console));
+                one.setStatus(InfoItem.ItemStatus.MODIFY);
+            }
         }
     }
 
