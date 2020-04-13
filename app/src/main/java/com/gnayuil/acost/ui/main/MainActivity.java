@@ -3,6 +3,7 @@ package com.gnayuil.acost.ui.main;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
 import androidx.databinding.DataBindingUtil;
@@ -28,16 +29,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = getActivityViewModelProvider(this).get(MainViewModel.class);
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mBinding.setLifecycleOwner(this);
-        mBinding.setCs(getConsoleStyle());
-        mBinding.setSetting(getSetting());
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_calculator, CalculatorFragment.newInstance())
                     .replace(R.id.frame_information, InformationFragment.newInstance())
                     .commitNow();
+        }
+
+        mViewModel = getActivityViewModelProvider(this).get(MainViewModel.class);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mBinding.setLifecycleOwner(this);
+        mBinding.setCs(getConsoleStyle());
+        mBinding.setSetting(getSetting());
+        if (mBinding.spSlideSettingLanguage != null) {
+            ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
+            mBinding.spSlideSettingLanguage.setAdapter(spinnerAdapter);
         }
 
         mSharedViewModel.getInfoList().observe(this, new Observer<List<InfoItem>>() {

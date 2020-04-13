@@ -39,6 +39,7 @@
                 android:paddingEnd="5dp"
                 android:singleLine="true"
                 android:text="@{vm.console}"
+                android:textColor="@color/textColorPrimary"
                 android:textSize="16sp" />
 
             <LinearLayout
@@ -125,17 +126,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
                 android:text="@string/setting_language"
+                app:layout_constraintBottom_toBottomOf="@id/sp_slide_setting_language"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/sw_slide_setting_dark_mode" />
+                app:layout_constraintTop_toTopOf="@id/sp_slide_setting_language" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/sp_slide_setting_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
                 android:entries="@array/language"
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"

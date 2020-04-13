@@ -9,4 +9,5 @@
     <color name="solidColor">#88FFFFFF</color>
     <color name="selectedSolidColor">#338FBC94</color>
     <color name="strokeColor">#33666666</color>
+    <color name="textColor">#BB56445D</color>
 </resources>
