@@ -42,6 +42,11 @@ public class InformationFragment extends BaseFragment {
 
         adapter = new InfoAdapter(getActivity(), new InfoAdapter.OnItemClickListener() {
             @Override
+            public void onItemClick(int position) {
+                mSharedViewModel.checkItem(position);
+            }
+
+            @Override
             public void onAddClick() {
                 mSharedViewModel.addItem();
             }

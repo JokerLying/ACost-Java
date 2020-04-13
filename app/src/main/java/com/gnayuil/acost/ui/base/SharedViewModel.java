@@ -16,6 +16,8 @@ public class SharedViewModel extends ViewModel {
 
     private DecimalFormat costFormat = new DecimalFormat("0.##");
 
+    private int selectedPosition = 0;
+
     public SharedViewModel() {
         initData();
     }
@@ -24,12 +26,31 @@ public class SharedViewModel extends ViewModel {
         return infoList;
     }
 
+    public void checkItem(int position) {
+        if (infoList.getValue() == null) {
+            initData();
+        }
+        InfoItem uncheckItem = infoList.getValue().get(selectedPosition);
+        uncheckItem.setCheck(false);
+        uncheckItem.setStatus(InfoItem.ItemStatus.MODIFY);
+        selectedPosition = position;
+        InfoItem checkedItem = infoList.getValue().get(selectedPosition);
+        checkedItem.setCheck(true);
+        checkedItem.setStatus(InfoItem.ItemStatus.MODIFY);
+        infoList.setValue(infoList.getValue());
+    }
+
     public void addItem() {
         if (infoList.getValue() == null) {
             initData();
         }
+        InfoItem uncheckItem = infoList.getValue().get(selectedPosition);
+        uncheckItem.setCheck(false);
+        uncheckItem.setStatus(InfoItem.ItemStatus.MODIFY);
         InfoItem addOne = new InfoItem();
+        addOne.setCheck(true);
         addOne.setStatus(InfoItem.ItemStatus.ADD);
+        selectedPosition = infoList.getValue().size();
         infoList.getValue().add(addOne);
         infoList.setValue(infoList.getValue());
     }

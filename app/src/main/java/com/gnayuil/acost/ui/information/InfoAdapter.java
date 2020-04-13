@@ -23,19 +23,19 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
 
     private Context mContext;
     private List<InfoItem> mList;
-    private int selectedPosition;
     private static final int TYPE_NORMAL = 1;
     private static final int TYPE_ADD = 2;
     private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
+        void onItemClick(int position);
+
         void onAddClick();
     }
 
     public InfoAdapter(Context mContext, OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
         this.onItemClickListener = onItemClickListener;
-        selectedPosition = 0;
     }
 
     public void setList(List<InfoItem> list) {
@@ -48,15 +48,14 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         add.setType(InfoItem.ItemType.ADD);
         add.setStatus(InfoItem.ItemStatus.NONE);
         mList.add(add);
-        for (int i = 0; i < mList.size(); i++) {
-            InfoItem one = mList.get(i);
+        for (int i = 0; i < list.size(); i++) {
+            InfoItem one = list.get(i);
             if (one.getStatus() == InfoItem.ItemStatus.MODIFY) {
                 one.setStatus(InfoItem.ItemStatus.NONE);
                 notifyItemChanged(i);
             } else if (one.getStatus() == InfoItem.ItemStatus.ADD) {
                 one.setStatus(InfoItem.ItemStatus.NONE);
                 notifyItemInserted(i);
-                notifyItemChanged(mList.size() - 1);
             }
         }
     }
@@ -112,13 +111,10 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mList.get(selectedPosition).setCheck(false);
-                notifyItemChanged(selectedPosition);
-                selectedPosition = position;
-                mList.get(selectedPosition).setCheck(true);
-                notifyItemChanged(selectedPosition);
+                onItemClickListener.onItemClick(position);
             }
         });
+        binding.executePendingBindings();
     }
 
     private void initAddItem(InfoViewHolder holder) {
@@ -131,16 +127,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             @Override
             public void onClick(View view) {
                 onItemClickListener.onAddClick();
-                notifyItemInserted(mList.size() - 2);
-                notifyItemRangeChanged(mList.size() - 2, 2);
-
-                mList.get(selectedPosition).setCheck(false);
-                notifyItemChanged(selectedPosition);
-                selectedPosition = mList.size() - 2;
-                mList.get(selectedPosition).setCheck(true);
-                notifyItemChanged(selectedPosition);
             }
         });
+        binding.executePendingBindings();
     }
 
     @Override
