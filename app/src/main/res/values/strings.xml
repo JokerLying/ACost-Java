@@ -16,11 +16,10 @@
 
     <string name="add_packet">新的篮子</string>
 
-    <string name="realCost">实际金额</string>
+    <string name="realCost">实付金额</string>
     <string name="packet">%1$s号篮子</string>
 
     <string name="setting_advanced">高级模式</string>
-    <string name="advanced_mode_tip">本功能暂时仅对作者本人开放</string>
     <string name="setting_dark_mode">黑暗模式</string>
     <string name="setting_language">语言</string>
 

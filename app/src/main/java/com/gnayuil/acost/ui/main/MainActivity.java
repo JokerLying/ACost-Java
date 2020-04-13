@@ -2,7 +2,6 @@ package com.gnayuil.acost.ui.main;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.lib.widget.snackbar.Snackbar;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 
@@ -55,14 +54,7 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        if (mBinding.swSlideSettingAdvanced != null && mBinding.swSlideSettingDarkMode != null) {
-            mBinding.swSlideSettingAdvanced.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                    mBinding.swSlideSettingAdvanced.setChecked(false);
-                    Snackbar.with(MainActivity.this).setText(getString(R.string.advanced_mode_tip)).show();
-                }
-            });
+        if (mBinding.swSlideSettingDarkMode != null) {
             mBinding.swSlideSettingDarkMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
@@ -93,7 +85,6 @@ public class MainActivity extends BaseActivity {
         }
         Setting setting = new Setting();
         setting.setVersionName(getString(R.string.version, versionName));
-        setting.setAdvanced(false);
         setting.setDarkMode(mViewModel.getDarkMode());
         return setting;
     }
