@@ -140,9 +140,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     private InfoStyle getInfoStyle() {
         InfoStyle is = new InfoStyle();
         is.setRadius(DisplayUtils.dp2px(4));
-        is.setNormalSolidColor(0x88ffffff);
-        is.setSelectedSolidColor(0x88eeeeee);
-        is.setStrokeColor(0x33666666);
+        is.setNormalSolidColor(mContext.getColor(R.color.solidColor));
+        is.setSelectedSolidColor(mContext.getColor(R.color.selectedSolidColor));
+        is.setStrokeColor(mContext.getColor(R.color.strokeColor));
         is.setStrokeWidth(1);
         is.setSpacing(DisplayUtils.dp2px(5));
         return is;

@@ -67,8 +67,8 @@ public class MainActivity extends BaseActivity {
     private ConsoleStyle getConsoleStyle() {
         ConsoleStyle cs = new ConsoleStyle();
         cs.setRadius(DisplayUtils.dp2px(4));
-        cs.setSolidColor(0x88ffffff);
-        cs.setStrokeColor(0x33666666);
+        cs.setSolidColor(getColor(R.color.solidColor));
+        cs.setStrokeColor(getColor(R.color.strokeColor));
         cs.setStrokeWidth(1);
         cs.setSpacing(DisplayUtils.dp2px(5));
         return cs;

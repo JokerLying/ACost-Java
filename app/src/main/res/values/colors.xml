@@ -4,4 +4,9 @@
     <color name="colorPrimaryDark">#8FBC94</color>
     <color name="colorAccent">#C5E99B</color>
     <color name="textColorPrimary">#56445D</color>
+    <color name="windowBackground">#F2F2F2</color>
+
+    <color name="solidColor">#88FFFFFF</color>
+    <color name="selectedSolidColor">#338FBC94</color>
+    <color name="strokeColor">#33666666</color>
 </resources>
