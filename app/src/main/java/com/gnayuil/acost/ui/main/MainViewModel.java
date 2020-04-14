@@ -1,5 +1,6 @@
 package com.gnayuil.acost.ui.main;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -10,9 +11,9 @@ import java.util.List;
 
 public class MainViewModel extends ViewModel {
 
-    private static String DARK_MODE = "darkMode";
-
     private MutableLiveData<String> console = new MutableLiveData<>();
+
+    private static String DARK_MODE = "darkMode";
 
     public MainViewModel() {
         console.setValue("0");
@@ -33,6 +34,7 @@ public class MainViewModel extends ViewModel {
 
     void changeDarkMode(boolean checked) {
         SPUtils.getInstance().put(DARK_MODE, checked);
+        AppCompatDelegate.setDefaultNightMode(checked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     boolean getDarkMode() {

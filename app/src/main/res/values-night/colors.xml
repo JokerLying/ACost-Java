@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#84a9ac</color>
+    <color name="colorPrimaryDark">#3b6978</color>
+    <color name="colorAccent">#62929a</color>
+    <color name="textColorPrimary">#cae8d5</color>
+    <color name="windowBackground">#152A35</color>
+
+    <color name="solidColor">#44FFFFFF</color>
+    <color name="selectedSolidColor">#553b6978</color>
+    <color name="strokeColor">#33666666</color>
+    <color name="textColorSecondary">#bbcae8d5</color>
+    <color name="addPacketTextColor">#bbcae8d5</color>
+</resources>
