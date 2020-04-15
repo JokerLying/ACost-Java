@@ -26,6 +26,16 @@ public class SharedViewModel extends ViewModel {
         return infoList;
     }
 
+    private void initData() {
+        List<InfoItem> infoList = new ArrayList<>();
+        InfoItem realCost = new InfoItem();
+        realCost.setCheck(true);
+        infoList.add(realCost);
+        InfoItem packetOne = new InfoItem();
+        infoList.add(packetOne);
+        this.infoList.setValue(infoList);
+    }
+
     public void checkItem(int position) {
         if (infoList.getValue() == null) {
             initData();
@@ -55,14 +65,16 @@ public class SharedViewModel extends ViewModel {
         infoList.setValue(infoList.getValue());
     }
 
-    private void initData() {
-        List<InfoItem> infoList = new ArrayList<>();
-        InfoItem realCost = new InfoItem();
-        realCost.setCheck(true);
-        infoList.add(realCost);
-        InfoItem packetOne = new InfoItem();
-        infoList.add(packetOne);
-        this.infoList.setValue(infoList);
+    public void removeItem(int position) {
+        if (infoList.getValue() == null) {
+            initData();
+        }
+        infoList.getValue().remove(position);
+        if (position <= selectedPosition) {
+            selectedPosition--;
+//            infoList.getValue().get(selectedPosition).setCheck(true);
+        }
+        updatePacketsCost();
     }
 
     public void clickOne(String str) {

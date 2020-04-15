@@ -60,6 +60,21 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         }
     }
 
+    public void removeItem(int position) {
+        mList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(1, mList.size() - 1);
+    }
+
+    public boolean checkCanBeRemoved(int position) {
+        if (position == 0 || position == mList.size() - 1 || (position == 1 && mList.size() == 3)) {
+            notifyItemChanged(position);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     @Override
     public int getItemViewType(int position) {
         InfoItem item = mList.get(position);

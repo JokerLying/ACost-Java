@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gnayuil.acost.R;
 import com.gnayuil.acost.data.bean.InfoItem;
@@ -52,6 +54,23 @@ public class InformationFragment extends BaseFragment {
             }
         });
         mBinding.rvInfo.setAdapter(adapter);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.START | ItemTouchHelper.END) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                if (adapter.checkCanBeRemoved(position)) {
+                    mSharedViewModel.removeItem(position);
+                    adapter.removeItem(position);
+                }
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(mBinding.rvInfo);
 
         mSharedViewModel.getInfoList().observe(mActivity, new Observer<List<InfoItem>>() {
             @Override
