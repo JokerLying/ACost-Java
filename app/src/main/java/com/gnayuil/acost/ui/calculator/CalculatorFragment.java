@@ -41,10 +41,6 @@ public class CalculatorFragment extends BaseFragment {
 
     private ButtonStyle getButtonStyle() {
         ButtonStyle bs = new ButtonStyle();
-        bs.setRadius(DisplayUtils.dp2px(4));
-        bs.setSolidColor(mActivity.getColor(R.color.solidColor));
-        bs.setStrokeColor(mActivity.getColor(R.color.strokeColor));
-        bs.setStrokeWidth(1);
         bs.setSpacing(DisplayUtils.dp2px(5));
         return bs;
     }

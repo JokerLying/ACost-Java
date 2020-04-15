@@ -122,7 +122,6 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         if (binding == null) {
             return;
         }
-        binding.setIs(getInfoStyle());
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

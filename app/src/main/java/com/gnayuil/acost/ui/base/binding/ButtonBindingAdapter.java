@@ -1,24 +1,13 @@
 package com.gnayuil.acost.ui.base.binding;
 
-import android.graphics.drawable.GradientDrawable;
 import android.widget.Button;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.BindingAdapter;
 
 import com.gnayuil.acost.R;
-import com.gnayuil.acost.data.style.ButtonStyle;
 
 public class ButtonBindingAdapter {
-
-    @BindingAdapter(value = {"btn_style"})
-    public static void setBackground(Button view, ButtonStyle style) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setCornerRadius(style.getRadius());
-        drawable.setColor(style.getSolidColor());
-        drawable.setStroke(style.getStrokeWidth(), style.getStrokeColor());
-        view.setBackground(drawable);
-    }
 
     @BindingAdapter(value = {"btn_spacing"})
     public static void setMargin(Button view, int spacing) {

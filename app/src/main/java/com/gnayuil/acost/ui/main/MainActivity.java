@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 
@@ -25,6 +27,15 @@ public class MainActivity extends BaseActivity {
 
     MainViewModel mViewModel;
     ActivityMainBinding mBinding;
+    static String sDrawerStatus = "showDrawer";
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mBinding.layoutDrawer != null) {
+            outState.putBoolean(sDrawerStatus, mBinding.layoutDrawer.isDrawerOpen(GravityCompat.START));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,15 @@ public class MainActivity extends BaseActivity {
         mBinding.setLifecycleOwner(this);
         mBinding.setCs(getConsoleStyle());
         mBinding.setSetting(getSetting());
+
+        if (savedInstanceState != null) {
+            if (savedInstanceState.getBoolean(sDrawerStatus, false)) {
+                if (mBinding.layoutDrawer != null) {
+                    mBinding.layoutDrawer.openDrawer(GravityCompat.START);
+                }
+            }
+        }
+
         if (mBinding.spSlideSettingLanguage != null) {
             ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
             mBinding.spSlideSettingLanguage.setAdapter(spinnerAdapter);
