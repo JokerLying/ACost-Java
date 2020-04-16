@@ -42,12 +42,18 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         if (mList == null) {
             mList = new ArrayList<>();
         }
+        int removeCount = mList.size() - 1 - list.size();
         mList.clear();
         mList.addAll(list);
         InfoItem add = new InfoItem();
         add.setType(InfoItem.ItemType.ADD);
         add.setStatus(InfoItem.ItemStatus.NONE);
         mList.add(add);
+        if (removeCount > 0) {
+            notifyItemRangeRemoved(mList.size(), removeCount);
+            notifyItemRangeChanged(0, 3);
+            return;
+        }
         for (int i = 0; i < list.size(); i++) {
             InfoItem one = list.get(i);
             if (one.getStatus() == InfoItem.ItemStatus.MODIFY) {

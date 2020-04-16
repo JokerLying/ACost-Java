@@ -37,6 +37,16 @@ public class CalculatorFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = getFragmentViewModelProvider(this).get(CalculatorViewModel.class);
+
+        mBinding.btnDel.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (mSharedViewModel.getInfoList().getValue() != null) {
+                    mSharedViewModel.cleanData();
+                }
+                return true;
+            }
+        });
     }
 
     private ButtonStyle getButtonStyle() {

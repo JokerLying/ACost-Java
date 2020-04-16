@@ -36,6 +36,16 @@ public class SharedViewModel extends ViewModel {
         this.infoList.setValue(infoList);
     }
 
+    public void cleanData() {
+        if (infoList.getValue() == null) {
+            initData();
+            return;
+        }
+        infoList.getValue().clear();
+        selectedPosition = 0;
+        initData();
+    }
+
     public void checkItem(int position) {
         if (infoList.getValue() == null) {
             initData();
