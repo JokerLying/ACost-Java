@@ -1,6 +1,7 @@
 package com.gnayuil.acost.ui.calculator;
 
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import com.gnayuil.acost.data.style.ButtonStyle;
 import com.gnayuil.acost.databinding.FragmentCalculatorBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 import com.gnayuil.acost.utils.DisplayUtils;
+
+import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 
 public class CalculatorFragment extends BaseFragment {
 
@@ -43,6 +46,7 @@ public class CalculatorFragment extends BaseFragment {
             public boolean onLongClick(View view) {
                 if (mSharedViewModel.getInfoList().getValue() != null) {
                     mSharedViewModel.cleanData();
+                    view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, FLAG_IGNORE_GLOBAL_SETTING);
                 }
                 return true;
             }
