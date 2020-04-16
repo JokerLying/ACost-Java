@@ -30,8 +30,10 @@ public class SharedViewModel extends ViewModel {
         List<InfoItem> infoList = new ArrayList<>();
         InfoItem realCost = new InfoItem();
         realCost.setCheck(true);
+        realCost.setStatus(InfoItem.ItemStatus.MODIFY);
         infoList.add(realCost);
         InfoItem packetOne = new InfoItem();
+        packetOne.setStatus(InfoItem.ItemStatus.MODIFY);
         infoList.add(packetOne);
         this.infoList.setValue(infoList);
     }
