@@ -78,18 +78,18 @@ public class MainActivity extends BaseActivity {
         mViewModel.getDarkMode().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean darkMode) {
-                SettingUtils.changeDarkMode(darkMode);
+                SettingUtils.setDarkMode(darkMode);
             }
         });
 
         if (mBinding.spSlideSettingLanguage != null) {
             ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
             mBinding.spSlideSettingLanguage.setAdapter(spinnerAdapter);
-            mBinding.spSlideSettingLanguage.setSelection(SettingUtils.getLanguage());
+            mBinding.spSlideSettingLanguage.setSelection(SettingUtils.getLanguageInt());
             mBinding.spSlideSettingLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                    SettingUtils.changeLanguage(position);
+                    SettingUtils.setLanguage(position);
                 }
 
                 @Override
