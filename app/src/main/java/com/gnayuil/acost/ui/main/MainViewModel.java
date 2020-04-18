@@ -1,52 +1,48 @@
 package com.gnayuil.acost.ui.main;
 
-import androidx.appcompat.app.AppCompatDelegate;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.gnayuil.acost.App;
 import com.gnayuil.acost.data.bean.InfoItem;
-import com.gnayuil.acost.utils.SPUtils;
+import com.gnayuil.acost.utils.SettingUtils;
 
 import java.util.List;
 
 public class MainViewModel extends ViewModel {
 
-    private MutableLiveData<String> console = new MutableLiveData<>();
+    private MutableLiveData<String> version = new MutableLiveData<>();
+    public MutableLiveData<Boolean> darkMode = new MutableLiveData<>();
 
-    private static String DARK_MODE = "darkMode";
-    private static String LANGUAGE = "language";
-
-    public MainViewModel() {
-        console.setValue("0");
+    public MutableLiveData<String> getVersion() {
+        String versionName = "error";
+        try {
+            PackageManager packageManager = App.getApp().getPackageManager();
+            PackageInfo packageInfo = packageManager.getPackageInfo(App.getApp().getPackageName(), 0);
+            versionName = packageInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        version.setValue(versionName);
+        return version;
     }
 
-    public MutableLiveData<String> getConsole() {
-        return console;
+    MutableLiveData<Boolean> getDarkMode() {
+        darkMode.setValue(SettingUtils.getDarkMode());
+        return darkMode;
     }
 
-    void setInfoList(List<InfoItem> infoItems) {
+    String getShowConsole(List<InfoItem> infoItems) {
         for (InfoItem one : infoItems) {
             if (one.isCheck()) {
                 String[] cost = one.getLambda().split("\\+");
-                console.setValue(cost[cost.length - 1]);
+                return cost[cost.length - 1];
             }
         }
+        return "0";
     }
 
-    void changeDarkMode(boolean checked) {
-        SPUtils.getInstance().put(DARK_MODE, checked);
-        AppCompatDelegate.setDefaultNightMode(checked ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
-    }
-
-    boolean getDarkMode() {
-        return SPUtils.getInstance().getBoolean(DARK_MODE, false);
-    }
-
-    void changeLanguage(String language) {
-        SPUtils.getInstance().put(LANGUAGE, language);
-    }
-
-    String getLanguage() {
-        return SPUtils.getInstance().getString(LANGUAGE);
-    }
 }
