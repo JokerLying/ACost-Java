@@ -14,6 +14,7 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<String> console = new MutableLiveData<>();
 
     private static String DARK_MODE = "darkMode";
+    private static String LANGUAGE = "language";
 
     public MainViewModel() {
         console.setValue("0");
@@ -41,4 +42,11 @@ public class MainViewModel extends ViewModel {
         return SPUtils.getInstance().getBoolean(DARK_MODE, false);
     }
 
+    void changeLanguage(String language) {
+        SPUtils.getInstance().put(LANGUAGE, language);
+    }
+
+    String getLanguage() {
+        return SPUtils.getInstance().getString(LANGUAGE);
+    }
 }

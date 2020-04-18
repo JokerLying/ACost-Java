@@ -3,6 +3,8 @@ package com.gnayuil.acost.ui.main;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 
@@ -64,6 +66,17 @@ public class MainActivity extends BaseActivity {
         if (mBinding.spSlideSettingLanguage != null) {
             ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
             mBinding.spSlideSettingLanguage.setAdapter(spinnerAdapter);
+            mBinding.spSlideSettingLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         }
 
         mSharedViewModel.getInfoList().observe(this, new Observer<List<InfoItem>>() {
