@@ -28,7 +28,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(View view, int position);
+
+        void onItemLongClick(View view, int position);
 
         void onAddClick();
     }
@@ -132,7 +134,21 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClickListener.onItemClick(position);
+                onItemClickListener.onItemClick(view, position);
+            }
+        });
+        binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (!item.isCheck()) {
+                    return true;
+                }
+                if (position == 0 || position == mList.size() - 1) {
+                    return true;
+                }
+                onItemClickListener.onItemLongClick(view, position);
+                notifyItemInserted(mList.size() - 2);
+                return true;
             }
         });
         binding.executePendingBindings();
@@ -147,6 +163,12 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             @Override
             public void onClick(View view) {
                 onItemClickListener.onAddClick();
+            }
+        });
+        binding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                return true;
             }
         });
         binding.executePendingBindings();

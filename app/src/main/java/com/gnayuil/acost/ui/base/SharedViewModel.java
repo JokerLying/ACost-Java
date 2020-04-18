@@ -77,6 +77,17 @@ public class SharedViewModel extends ViewModel {
         infoList.setValue(infoList.getValue());
     }
 
+    public void copyItem(int position) {
+        if (infoList.getValue() == null) {
+            initData();
+        }
+        InfoItem copyItem = InfoItem.copyForm(infoList.getValue().get(position));
+        copyItem.setCheck(false);
+        infoList.getValue().add(copyItem);
+        updatePacketsCost();
+        infoList.setValue(infoList.getValue());
+    }
+
     public void removeItem(int position) {
         if (infoList.getValue() == null) {
             initData();
@@ -84,7 +95,6 @@ public class SharedViewModel extends ViewModel {
         infoList.getValue().remove(position);
         if (position <= selectedPosition) {
             selectedPosition--;
-//            infoList.getValue().get(selectedPosition).setCheck(true);
         }
         updatePacketsCost();
     }

@@ -1,6 +1,7 @@
 package com.gnayuil.acost.ui.information;
 
 import android.os.Bundle;
+import android.view.HapticFeedbackConstants;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.gnayuil.acost.databinding.FragmentInformationBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 
 import java.util.List;
+
+import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 
 public class InformationFragment extends BaseFragment {
 
@@ -44,8 +47,14 @@ public class InformationFragment extends BaseFragment {
 
         adapter = new InfoAdapter(getActivity(), new InfoAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(View view, int position) {
                 mSharedViewModel.checkItem(position);
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                mSharedViewModel.copyItem(position);
+                view.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, FLAG_IGNORE_GLOBAL_SETTING);
             }
 
             @Override

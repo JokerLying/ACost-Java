@@ -24,6 +24,17 @@ public class InfoItem {
         status = ItemStatus.NONE;
     }
 
+    public static InfoItem copyForm(InfoItem fromItem) {
+        InfoItem toItem = new InfoItem();
+        toItem.setCheck(fromItem.isCheck());
+        toItem.setConsole(fromItem.getConsole());
+        toItem.setLambda(fromItem.getLambda());
+        toItem.setTitle(fromItem.getTitle());
+        toItem.setType(fromItem.getType());
+        toItem.setStatus(fromItem.getStatus());
+        return toItem;
+    }
+
     public boolean isCheck() {
         return check;
     }
