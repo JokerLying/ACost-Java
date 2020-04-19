@@ -65,7 +65,7 @@ public class InformationFragment extends BaseFragment {
         });
         mBinding.rvInfo.setAdapter(adapter);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
-                ItemTouchHelper.START | ItemTouchHelper.END) {
+                ItemTouchHelper.START) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
