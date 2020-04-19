@@ -77,7 +77,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:background="@color/windowBackground"
-            android:fitsSystemWindows="true">
+            android:clickable="true"
+            android:fitsSystemWindows="true"
+            android:focusable="true">
 
             <ImageView
                 android:id="@+id/iv_slide_top_bg"
