@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_info_item_console"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="5dp"
@@ -12,9 +11,9 @@
         android:paddingEnd="5dp">
 
         <TextView
+            android:id="@+id/tv_info_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_packet"
             android:textColor="@color/addPacketTextColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

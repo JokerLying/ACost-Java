@@ -18,6 +18,11 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<Boolean> darkMode = new MutableLiveData<>();
 
     public MutableLiveData<String> getVersion() {
+        version.setValue(getVersionString());
+        return version;
+    }
+
+    String getVersionString() {
         String versionName = "error";
         try {
             PackageManager packageManager = App.getApp().getPackageManager();
@@ -26,8 +31,7 @@ public class MainViewModel extends ViewModel {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        version.setValue(versionName);
-        return version;
+        return versionName;
     }
 
     MutableLiveData<Boolean> getDarkMode() {

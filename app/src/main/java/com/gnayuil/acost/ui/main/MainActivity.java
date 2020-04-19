@@ -1,5 +1,6 @@
 package com.gnayuil.acost.ui.main;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +27,8 @@ public class MainActivity extends BaseActivity {
 
     MainViewModel mViewModel;
     ActivityMainBinding mBinding;
+
+    ArrayAdapter languageAdapter;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -70,7 +73,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onChanged(String version) {
                 if (mBinding.tvSlideVersion != null) {
-                    mBinding.tvSlideVersion.setText(getString(R.string.version, version));
+                    mBinding.tvSlideVersion.setText(getResources().getString(R.string.version, version));
                 }
             }
         });
@@ -82,14 +85,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        if (languageAdapter == null) {
+            languageAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
+        }
         if (mBinding.spSlideSettingLanguage != null) {
-            ArrayAdapter spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.language, R.layout.spinner_item);
-            mBinding.spSlideSettingLanguage.setAdapter(spinnerAdapter);
+            mBinding.spSlideSettingLanguage.setAdapter(languageAdapter);
             mBinding.spSlideSettingLanguage.setSelection(SettingUtils.getLanguageInt());
             mBinding.spSlideSettingLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                     SettingUtils.setLanguage(position);
+                    updateViewLanguage(SettingUtils.getLocalLanguageResources(MainActivity.this));
                 }
 
                 @Override
@@ -109,6 +115,20 @@ public class MainActivity extends BaseActivity {
         cs.setStrokeWidth(1);
         cs.setSpacing(DisplayUtils.dp2px(5));
         return cs;
+    }
+
+    public void updateViewLanguage(Resources resources) {
+        if (mBinding.tvSlideVersion != null) {
+            String version = mViewModel.getVersionString();
+            mBinding.tvSlideVersion.setText(resources.getString(R.string.version, version));
+        }
+        if (mBinding.swSlideSettingDarkMode != null) {
+            mBinding.swSlideSettingDarkMode.setText(resources.getString(R.string.setting_dark_mode));
+        }
+        if (mBinding.tvSlideSettingLanguage != null) {
+            mBinding.tvSlideSettingLanguage.setText(resources.getString(R.string.setting_language));
+        }
+        mSharedViewModel.getLanguage().setValue(SettingUtils.getLanguageLocal());
     }
 
 }

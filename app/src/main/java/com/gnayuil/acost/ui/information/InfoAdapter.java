@@ -15,6 +15,7 @@ import com.gnayuil.acost.data.style.InfoStyle;
 import com.gnayuil.acost.databinding.AdapterInfoAddBinding;
 import com.gnayuil.acost.databinding.AdapterInfoItemBinding;
 import com.gnayuil.acost.utils.DisplayUtils;
+import com.gnayuil.acost.utils.SettingUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,11 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     public InfoAdapter(Context mContext, OnItemClickListener onItemClickListener) {
         this.mContext = mContext;
         this.onItemClickListener = onItemClickListener;
+    }
+
+    public void updateLanguage() {
+        this.mContext = SettingUtils.getLocalLanguageContext(mContext);
+        notifyDataSetChanged();
     }
 
     public void setList(List<InfoItem> list) {
@@ -159,6 +165,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         if (binding == null) {
             return;
         }
+        binding.tvInfoAdd.setText(mContext.getResources().getString(R.string.add_packet));
         binding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

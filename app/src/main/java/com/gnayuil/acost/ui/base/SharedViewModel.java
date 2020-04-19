@@ -9,10 +9,12 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SharedViewModel extends ViewModel {
 
     private MutableLiveData<List<InfoItem>> infoList = new MutableLiveData<>();
+    private MutableLiveData<Locale> language = new MutableLiveData<>();
 
     private DecimalFormat costFormat = new DecimalFormat("0.##");
 
@@ -24,6 +26,10 @@ public class SharedViewModel extends ViewModel {
 
     public MutableLiveData<List<InfoItem>> getInfoList() {
         return infoList;
+    }
+
+    public MutableLiveData<Locale> getLanguage() {
+        return language;
     }
 
     private void initData() {

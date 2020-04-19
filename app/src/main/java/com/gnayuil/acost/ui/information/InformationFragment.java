@@ -19,6 +19,7 @@ import com.gnayuil.acost.databinding.FragmentInformationBinding;
 import com.gnayuil.acost.ui.base.BaseFragment;
 
 import java.util.List;
+import java.util.Locale;
 
 import static android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING;
 
@@ -45,7 +46,7 @@ public class InformationFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = getFragmentViewModelProvider(this).get(InformationViewModel.class);
 
-        adapter = new InfoAdapter(getActivity(), new InfoAdapter.OnItemClickListener() {
+        adapter = new InfoAdapter(mActivity, new InfoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 mSharedViewModel.checkItem(position);
@@ -85,6 +86,13 @@ public class InformationFragment extends BaseFragment {
             @Override
             public void onChanged(List<InfoItem> infoItems) {
                 adapter.setList(infoItems);
+            }
+        });
+
+        mSharedViewModel.getLanguage().observe(mActivity, new Observer<Locale>() {
+            @Override
+            public void onChanged(Locale locale) {
+                adapter.updateLanguage();
             }
         });
     }

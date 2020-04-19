@@ -1,6 +1,10 @@
 package com.gnayuil.acost.utils;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Build;
+import android.os.LocaleList;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -31,6 +35,29 @@ public class SettingUtils {
         if (language != getLanguageInt()) {
             SPUtils.getInstance().put(LANGUAGE, getLanguageIntToString(language));
         }
+    }
+
+    public static Resources getLocalLanguageResources(Context context) {
+        return getLocalLanguageContext(context).getResources();
+    }
+
+
+    public static Context getLocalLanguageContext(Context context) {
+        Locale locale = getLanguageLocal();
+        Resources res = context.getResources();
+        Configuration configuration = res.getConfiguration();
+        Context localizedContext;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            configuration.setLocale(locale);
+            LocaleList localeList = new LocaleList(locale);
+            LocaleList.setDefault(localeList);
+            configuration.setLocales(localeList);
+            localizedContext = context.createConfigurationContext(configuration);
+        } else {
+            configuration.setLocale(locale);
+            localizedContext = context.createConfigurationContext(configuration);
+        }
+        return localizedContext;
     }
 
     public static int getLanguageInt() {
