@@ -15,6 +15,8 @@ import java.util.Locale;
 public class SettingUtils {
 
     public static String DRAWER_STATUS = "showDrawer";
+    public static String MASK_STATUS = "showMask";
+    public static String MASK_COLOR = "maskColor";
     private static String DARK_MODE = "darkMode";
     private static String LANGUAGE = "language";
 

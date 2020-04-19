@@ -3,9 +3,14 @@ package com.gnayuil.acost.ui.main;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -30,11 +35,18 @@ public class MainActivity extends BaseActivity {
 
     ArrayAdapter languageAdapter;
 
+    @ColorInt
+    int maskColor;
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mBinding.layoutDrawer != null) {
             outState.putBoolean(SettingUtils.DRAWER_STATUS, mBinding.layoutDrawer.isDrawerOpen(GravityCompat.START));
+            if (mBinding.viewMask != null) {
+                outState.putBoolean(SettingUtils.MASK_STATUS, mBinding.viewMask.getVisibility() == View.VISIBLE);
+                outState.putInt(SettingUtils.MASK_COLOR, maskColor);
+            }
         }
     }
 
@@ -60,6 +72,32 @@ public class MainActivity extends BaseActivity {
                     mBinding.layoutDrawer.openDrawer(GravityCompat.START);
                 }
             }
+            if (savedInstanceState.getBoolean(SettingUtils.MASK_STATUS, false)) {
+                if (mBinding.viewMask != null) {
+                    mBinding.viewMask.setBackgroundColor(savedInstanceState.getInt(SettingUtils.MASK_COLOR));
+                    mBinding.viewMask.setVisibility(View.VISIBLE);
+                    AlphaAnimation alphaAnimation = new AlphaAnimation(1, 0);
+                    alphaAnimation.setDuration(700);
+                    alphaAnimation.setInterpolator(new AccelerateInterpolator());
+                    alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            mBinding.viewMask.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    mBinding.viewMask.startAnimation(alphaAnimation);
+                }
+            }
         }
 
         mSharedViewModel.getInfoList().observe(this, new Observer<List<InfoItem>>() {
@@ -80,9 +118,30 @@ public class MainActivity extends BaseActivity {
 
         mViewModel.getDarkMode().observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(Boolean darkMode) {
-                if (darkMode != SettingUtils.getDarkMode()) {
-                    SettingUtils.setDarkMode(darkMode);
+            public void onChanged(final Boolean darkMode) {
+                if (darkMode != SettingUtils.getDarkMode() && mBinding.viewMask != null) {
+                    AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+                    alphaAnimation.setDuration(300);
+                    alphaAnimation.setInterpolator(new AccelerateDecelerateInterpolator());
+                    alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+                        @Override
+                        public void onAnimationStart(Animation animation) {
+                            maskColor = getColor(R.color.colorAccent);
+                            mBinding.viewMask.setBackgroundColor(getColor(R.color.colorAccent));
+                            mBinding.viewMask.setVisibility(View.VISIBLE);
+                        }
+
+                        @Override
+                        public void onAnimationEnd(Animation animation) {
+                            SettingUtils.setDarkMode(darkMode);
+                        }
+
+                        @Override
+                        public void onAnimationRepeat(Animation animation) {
+
+                        }
+                    });
+                    mBinding.viewMask.startAnimation(alphaAnimation);
                 }
             }
         });
