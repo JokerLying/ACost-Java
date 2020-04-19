@@ -81,7 +81,9 @@ public class MainActivity extends BaseActivity {
         mViewModel.getDarkMode().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean darkMode) {
-                SettingUtils.setDarkMode(darkMode);
+                if (darkMode != SettingUtils.getDarkMode()) {
+                    SettingUtils.setDarkMode(darkMode);
+                }
             }
         });
 

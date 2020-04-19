@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStore;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import com.gnayuil.acost.utils.SettingUtils;
+
 public class App extends Application implements ViewModelStoreOwner {
 
     private static App app;
@@ -20,6 +22,8 @@ public class App extends Application implements ViewModelStoreOwner {
 
         app = this;
         viewModelStore = new ViewModelStore();
+
+        initDarkMode();
     }
 
     @NonNull
@@ -41,5 +45,11 @@ public class App extends Application implements ViewModelStoreOwner {
             factory = ViewModelProvider.AndroidViewModelFactory.getInstance(this);
         }
         return factory;
+    }
+
+    private void initDarkMode() {
+        if (SettingUtils.getDarkMode()) {
+            SettingUtils.changeDarkMode(true);
+        }
     }
 }

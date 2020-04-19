@@ -19,11 +19,13 @@ public class SettingUtils {
     private static String LANGUAGE = "language";
 
     public static void setDarkMode(boolean darkMode) {
-        SPUtils.getInstance().put(DARK_MODE, darkMode);
-        changeDarkMode(darkMode);
+        if (darkMode != getDarkMode()) {
+            SPUtils.getInstance().put(DARK_MODE, darkMode);
+            changeDarkMode(darkMode);
+        }
     }
 
-    private static void changeDarkMode(boolean darkMode) {
+    public static void changeDarkMode(boolean darkMode) {
         AppCompatDelegate.setDefaultNightMode(darkMode ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO);
     }
 
